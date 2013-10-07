@@ -49,7 +49,9 @@ class Parser{
 
 				String line = scanner.nextLine();
 				str = line.split(",");
-				Point p = new Point(str[0],Integer.parseInt(str[1]),Integer.parseInt(str[2]));
+				
+				
+				Point p = new Point(str[0],Double.parseDouble(str[1]),Double.parseDouble(str[2]));
 				
 				//adding the point to the list of points
 				points.add(p);

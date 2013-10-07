@@ -38,7 +38,9 @@ class tsp{
 			//	if(args[i].equals("-t")){
 				//	option = Integer.parseInt(args[i+1]);
 			//	}else if(args[i].equals("-s")){
-				//	tsp.initialState = args[i+1];	
+					//tsp.initialState = args[i+1];	
+					tsp.initialState = "a";	
+
 			//	}else if(args[i].equals("-i")){
 					
 					/*
@@ -46,7 +48,7 @@ class tsp{
 					 * 
 					 * */
 					Parser p = new Parser();
-					if(!(p.parseFile("input1.txt"))){
+					if(!(p.parseFile("input2.txt"))){
 						System.err.println("Give correct Input filename");
 						return;
 					}
@@ -54,14 +56,18 @@ class tsp{
 					
 		//		}else if(args[i].equals("-op")){
 			//		tsp.outputPath = args[i+1];
+					tsp.outputPath = "output.txt";
 					
 					
 			//	}else if(args[i].equals("-ol")){
 				//	tsp.outputLog = args[i+1];
+					tsp.outputLog = "log.txt";
+
 		//		}
 		//	}
 				
-
+					Greedy g = new Greedy();
+					g.search();
 		
 		if(option == 1){
 			
