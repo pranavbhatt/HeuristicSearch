@@ -28,4 +28,19 @@ class Compare implements Comparator<NodeInfo>{
 	        }
 	    });
 	}
+	
+	
+	/**
+	 * Sorts the LinkedList of NodeInfo objects based on the total cost
+	 * total cost f
+	 * @param List is a linked list of type NodeInfo
+	 */
+	public static void sortT(LinkedList<NodeInfo> List) {
+	    Collections.sort(List, new Compare() {
+	        @Override
+	        public int compare(NodeInfo o1, NodeInfo o2) {
+	        return Double.valueOf(o1.f).compareTo(o2.f);
+	        }
+	    });
+	}
 }

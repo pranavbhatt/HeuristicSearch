@@ -57,6 +57,8 @@ class Parser{
 				points.add(p);
 			}
 			
+			tsp.numNodes = points.size();
+			System.out.println("Total Number of Nodes"+tsp.numNodes);
 			scanner.close();
 			createMap(points);
 			}catch(IOException e){

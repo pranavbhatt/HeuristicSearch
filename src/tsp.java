@@ -16,7 +16,7 @@ import java.util.*;
  * 
  * */
 class tsp{
-
+	protected static int numNodes;
 	protected static String initialState;
 	protected static HashMap<String, List<Node>> graph = new HashMap<String, List<Node>>();
 	protected static int option;
@@ -24,7 +24,7 @@ class tsp{
 	public static void main(String[] args) {
 		
 		
-		int i;
+		//int i;
 		
 
 	//	if(args.length != 10 ){
@@ -66,8 +66,8 @@ class tsp{
 		//		}
 		//	}
 				
-					Greedy g = new Greedy();
-					g.search();
+					Astar s = new Astar();
+					s.search();
 		
 		if(option == 1){
 			
