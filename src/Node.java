@@ -1,14 +1,13 @@
 /**
  *
- * (c)Pranav Bhatt, 2013
+ *@author pranavbhatt (c) 2013
  * 
  */
 
-
-/*
+/**
  * Node class creates initial nodes parsed from the input and stores their
  * straight line distance from the other node.
- * */
+ */
 class Node{
 
 	protected String name;

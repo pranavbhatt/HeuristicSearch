@@ -1,6 +1,6 @@
 /**
  *
- * (c)Pranav Bhatt, 2013
+ *@author pranavbhatt (c) 2013
  * 
  */
 import java.util.Collections;

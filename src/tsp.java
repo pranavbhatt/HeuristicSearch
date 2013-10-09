@@ -1,12 +1,12 @@
 /**
  *
- * (c)Pranav Bhatt, 2013
+ *@author pranavbhatt (c) 2013
  * 
  */
 import java.util.*;
 
 
-/*
+/**
  * This is the main class which reads the command line instructions and stores some information in
  * relevant static variables which are used in other classes
  * and passes the filename to the parser class method ParseFile.
