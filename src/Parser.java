@@ -88,7 +88,9 @@ class Parser{
 					 * */
 					sdistance = Math.sqrt(Math.pow(p.x - q.x, 2.0) + Math.pow(p.y - q.y, 2.0));
 					
-					//creating a node which is adjacent to current node p
+					/**
+					 * creating a node which is adjacent to current node p
+					 */
 					Node n = new Node(q.name,sdistance);
 					
 					value = tsp.graph.get(p.name);
@@ -105,17 +107,6 @@ class Parser{
 					}
 					}
 				}
-			
-			/*
-			System.out.println(" \nParent Name: "+p.name);
-			value2 = tsp.graph.get(p.name);
-			for(Node n:value2){
-				System.out.println("Child Name: "+n.name);
-				System.out.println("Child SLD: "+n.sld);
-			
-				
-			}*/
-			
 			}
 		}
 	}

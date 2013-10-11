@@ -3,12 +3,11 @@
  *@author pranavbhatt (c) 2013
  * 
  */
-import java.io.File;
 import java.util.*;
 
-/*
+/**
  * This is A* Search Class which performs A* search
- * to find optimal path from source node to goal node, using hashmap created by the parser class.
+ * to find optimal tour of the graph, using Straight Line Distance Heuristics on a HashMap created by the parser class.
  * this class also creates a traversal log of visited nodes.
  * 
  *  
@@ -17,9 +16,12 @@ import java.util.*;
 class Astar {
 
 	int count = 0;
-
 	/**
 	 * frontier is a FIFO queue
+	 * child is a node that is removed from the parent's childList
+	 * childList is a list of nodes that a parent is connected to.
+	 * endtour is the tour from the the last visited node back to the source node which is also the goal node
+	 * 
 	 */
 	LinkedList<NodeInfo> frontier;
 	Node child;
@@ -27,15 +29,13 @@ class Astar {
 	NodeInfo childData, endTour;
 	NodeInfo node;
 	Double gcost, hcost;
-	File optimal = new File(tsp.outputPath);
-	File logFile = new File(tsp.outputLog);
+	
 
 	/**
 	 * heuristicCost takes in a string value child, and finds its straight line
 	 * distance from the goal node
 	 * 
-	 * @param child
-	 *            : a variable of type String which represents a child name.
+	 * @param child : a variable of type String which represents a child name.
 	 * @return: returns the straight line distance of child from the goal node
 	 */
 	private double heuristicCost(String child) {
@@ -55,7 +55,6 @@ class Astar {
 
 		if (last == false) {
 			while (i < children.size()) {
-				// child is a node that is removed from the parent's childList
 				child = children.get(i);
 
 				if (!(node.path.contains(child.name))) {
@@ -82,7 +81,6 @@ class Astar {
 			int j = 0;
 			while (j < children.size()) {
 				double gcost = 0.0;
-				// child is a node that is removed from the parent's childList
 				child = children.get(j);
 				if (child.name.equals(tsp.initialState)) {
 					gcost = child.sld + node.g;
@@ -101,13 +99,8 @@ class Astar {
 
 		LOWriter.init();
 
-		// log.writeln("Breadth First Search");
-
-		/**
-		 * frontier a queue of nodes
-		 */
-		frontier = new LinkedList<NodeInfo>(); // Linkedlist frontier
-		node = new NodeInfo(tsp.initialState); // initial node
+		frontier = new LinkedList<NodeInfo>(); 
+		node = new NodeInfo(tsp.initialState); 
 
 		frontier.add(node);
 

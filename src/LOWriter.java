@@ -8,6 +8,8 @@ import java.io.IOException;
  *  This is a class which writes Logs and Outputs for various search algorithms.
  * 
  */
+
+
 public class LOWriter {
 	
 	
@@ -18,12 +20,13 @@ public class LOWriter {
 
 	/**
 	 * init is a static function of LOWriter class
-	 * It initializes output file called optimal which conatins the optimal tour,
+	 * It initializes output file called optimal which contains the optimal tour,
 	 * log file which contains the traverse log
 	 * it also creates two FileWriter objects
 	 *  opt and log: for writing to corresponding files.
 	 * 
 	 */
+	
 	protected static void init() {
 
 		// creates the file
@@ -44,8 +47,8 @@ public class LOWriter {
 		}
 	}
 	
-	/**
-	 * 
+
+	/** 
 	 * @param endTour: an object of type NodeInfo containing 
 	 * final path to goal node, optimal path cost(g), 
 	 * heuristics cost(h) from the current node to goal node(0.0) and total cost(f)

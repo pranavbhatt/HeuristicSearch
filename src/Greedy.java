@@ -6,16 +6,20 @@
 import java.util.LinkedList;
 import java.util.List;
 
-/*
- * This is Uniform Cost Search Class which performs uniform cost search
- * to find optimal path from source node to goal node, using hashmap created by the parser class.
- * this class also creates a traversal log of visited nodes.
- *  
+/**
+ * This is Greedy Search Class which performs greedy search,
+ * to find optimal path from source node to goal node, using Straight Line Distance Heuristics, 
+ * on a Graph represented by a HashMap(tsp.graph) created by the parser class.
  * */
 class Greedy {
 
-	/*
+	/**
 	 * frontier is a FIFO queue
+	 * explored is a LinkedList of explored Nodes in the graph
+	 * child is a node that is removed from the parent's childList
+	 * childList is a list of nodes that a parent is connected to.
+	 * Endtour is the tour from the the last visited node back to the source node which is also the goal node
+	 * 
 	 */
 	LinkedList<NodeInfo> frontier;
 	LinkedList<String> explored;
@@ -32,7 +36,7 @@ class Greedy {
 		if (last == false) {
 			while (i < children.size()) {
 				double gcost = 0.0;
-				// child is a node that is removed from the parent's childList
+				
 				child = children.get(i);
 
 				if (!(explored.contains(child.name))) {
@@ -65,15 +69,14 @@ class Greedy {
 		}
 	}
 
-	/*
-	 * function UNIFORM-COST-SEARCH(problem) returns a solution, or failure
+	/**
+	 * function search returns a solution(output and traverse log), or failure
 	 */
 	public void search() {
 
 		LOWriter.init();
 
-		System.out
-				.println("Greedy Search with Straight Line Distance Heuristics \n");
+		System.out.println("Greedy Search with Straight Line Distance Heuristics \n");
 
 		// a queue of nodes
 		frontier = new LinkedList<NodeInfo>();
