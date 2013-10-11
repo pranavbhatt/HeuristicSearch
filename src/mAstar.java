@@ -3,7 +3,6 @@
  *@author pranavbhatt (c) 2013
  * 
  */
-import java.io.File;
 import java.util.*;
 
 /*
@@ -14,7 +13,7 @@ import java.util.*;
  *  
  * */
 
-class Astar {
+class mAstar {
 
 	int count = 0;
 
@@ -26,9 +25,9 @@ class Astar {
 	List<Node> childList;
 	NodeInfo childData, endTour;
 	NodeInfo node;
-	Double gcost, hcost;
-	File optimal = new File(tsp.outputPath);
-	File logFile = new File(tsp.outputLog);
+	double gcost, hcost;
+	List<String> explored = new ArrayList<String>();
+	List<String> current = new ArrayList<String>();
 
 	/**
 	 * heuristicCost takes in a string value child, and finds its straight line
@@ -38,40 +37,79 @@ class Astar {
 	 *            : a variable of type String which represents a child name.
 	 * @return: returns the straight line distance of child from the goal node
 	 */
-	private double heuristicCost(String child) {
-		
+	
+	private double mheuristicCost(NodeInfo child) {
 		double h = 0.0;
-		for (Node c : tsp.graph.get(tsp.initialState)) {
-			if (c.name.equals(child)) {
-				h = c.sld;
-				break;
+		explored.clear();
+		current.clear();
+		List<Node> pNodes;
+		double min = 0.0;
+		String minNode = null;
+		
+		for(String s: child.path){
+			if(!s.equals(tsp.initialState)){
+				explored.add(s);
 			}
 		}
+		
+		current.add(child.nodeName);
+		explored.add(child.nodeName);
+		
+		
+		while(explored.size() <= (tsp.numNodes - 1)){
+			
+			/**
+			 * Iterating over current nodes
+			 */
+			min = 99999999.99999;
+			for(String s:current){
+				pNodes = tsp.graph.get(s);
+				for(Node p: pNodes){
+					if(!explored.contains(p.name)){
+						if(p.sld < min){
+							min = p.sld;
+							minNode = p.name;
+						}
+					}
+					
+				}
+				
+			}
+			
+			/**
+			 * Adding the currently extracted min node to the queue crrent
+			 */
+			
+			explored.add(minNode);
+			current.add(minNode);
+			h += min;
+		}
+		
 		return h;
 	}
 
 	private void addChildren(List<Node> children, boolean last) {
 		int i = 0;
-
 		if (last == false) {
 			while (i < children.size()) {
+
 				// child is a node that is removed from the parent's childList
 				child = children.get(i);
 
+
 				if (!(node.path.contains(child.name))) {
 
-					gcost = child.sld + node.g;
-					
-					hcost = heuristicCost(child.name);
 
+					gcost = child.sld + node.g;
+					hcost = 0.0;
 					/**
 					 * getting the ancestorList of parent and putting it in the
 					 * child
 					 */
-
-					childData = new NodeInfo(child.name, node.path, gcost,
-							hcost);
+					childData = new NodeInfo(child.name, node.path, gcost,hcost);
 					childData.path.add(node.nodeName);
+					hcost = mheuristicCost(childData);
+					childData.h = hcost;
 					childData.f = gcost + hcost;
 					frontier.add(childData);
 				}
@@ -110,6 +148,9 @@ class Astar {
 		node = new NodeInfo(tsp.initialState); // initial node
 
 		frontier.add(node);
+		node.h = mheuristicCost(node);
+		node.f = node.g + node.h;
+
 
 		while (true) {
 
@@ -123,6 +164,7 @@ class Astar {
 			 * Removing the front of the queue frontier
 			 */
 			node = frontier.remove();
+			
 
 			if (node.path.size() == (tsp.numNodes - 1)) {
 
@@ -140,7 +182,7 @@ class Astar {
 				LOWriter.output(endTour);
 				return;
 			} else {
-
+				
 				LOWriter.log(node);
 			}
 

@@ -24,49 +24,47 @@ class tsp{
 	public static void main(String[] args) {
 		
 		
-		//int i;
+		int i;
 		
 
-	//	if(args.length != 10 ){
-	//		System.err.println("Invalid number of arguments");
-		//	return;
-	//	}
+		if(args.length != 10 ){
+			System.err.println("Invalid number of arguments");
+			return;
+		}
 		
 		
-		//	for(i = 0;i < args.length;i++){
+			for(i = 0;i < args.length;i++){
 				
-			//	if(args[i].equals("-t")){
-				//	option = Integer.parseInt(args[i+1]);
-			//	}else if(args[i].equals("-s")){
-					//tsp.initialState = args[i+1];	
+				if(args[i].equals("-t")){
+					option = Integer.parseInt(args[i+1]);
+				}else if(args[i].equals("-s")){
+					tsp.initialState = args[i+1];	
 					tsp.initialState = "a";	
 
-			//	}else if(args[i].equals("-i")){
+				}else if(args[i].equals("-i")){
 					
 					/*
 					 * Creates a parser object which parses the input file.
 					 * 
 					 * */
 					Parser p = new Parser();
-					if(!(p.parseFile("input2.txt"))){
+					if(!(p.parseFile(args[i+1]))){
 						System.err.println("Give correct Input filename");
 						return;
 					}
 					
 					
-		//		}else if(args[i].equals("-op")){
-			//		tsp.outputPath = args[i+1];
-					tsp.outputPath = "output.txt";
+				}else if(args[i].equals("-op")){
+					tsp.outputPath = args[i+1];
 					
 					
-			//	}else if(args[i].equals("-ol")){
-				//	tsp.outputLog = args[i+1];
-					tsp.outputLog = "log.txt";
+				}else if(args[i].equals("-ol")){
+					tsp.outputLog = args[i+1];
 
-		//		}
-		//	}
+				}
+			}
 				
-					Astar s = new Astar();
+					mAstar s = new mAstar();
 					s.search();
 		
 		if(option == 1){
@@ -75,24 +73,25 @@ class tsp{
 			 * Creates a BFS object which performs Breadth First Search
 			 * 
 			 * */
-		//	BFS bfs = new BFS();
-			//bfs.Bfs();
+			Greedy g = new Greedy();
+			g.search();
+			System.out.println("Completed Greedy Search on the input");
 		}else if( option == 2){
 			
-			/*
-			 * Creates a DFS object which performs Breadth First Search
-			 * 
-			 * */
-			//DFS dfs = new DFS();
-			//dfs.Dfs();
+			Astar a = new Astar();
+			a.search();
+			System.out.println("Completed A* Search with SLD heuristics on the input");
+
 		
 		}else if(option == 3){
 			/*
 			 * Creates a Uniform Cost Search object which performs Breadth First Search
 			 * 
 			 * */
-		//	UniformCost u = new UniformCost();
-		//	u.Uncs();
+			mAstar m = new mAstar();
+			m.search();
+			System.out.println("Completed A* Search with MST heuristics on the input");
+
 		}
 		
 	}

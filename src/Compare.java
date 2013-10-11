@@ -15,6 +15,8 @@ import java.util.LinkedList;
  * */
 class Compare implements Comparator<NodeInfo>{
 	
+	
+	
 	@Override
     public int compare(NodeInfo n1, NodeInfo n2){
 		return 0;
@@ -28,8 +30,7 @@ class Compare implements Comparator<NodeInfo>{
 	        }
 	    });
 	}
-	
-	
+
 	/**
 	 * Sorts the LinkedList of NodeInfo objects based on the total cost
 	 * total cost f

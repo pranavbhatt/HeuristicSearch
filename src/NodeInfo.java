@@ -54,6 +54,7 @@ public class NodeInfo {
 	 * @param h : heuristic cost
 	 */
 	public NodeInfo(String nodeName, ArrayList<String>path,double g,double h){
+
 		this.nodeName = nodeName;
 		this.g = g;
 		for(String s:path){
@@ -62,10 +63,29 @@ public class NodeInfo {
 		this.h = h;
 	}
 	
+	/**
+	 * This constructor is used to create the initialState of the problem
+	 * @param nodeName
+	 */
 	public NodeInfo(String nodeName){
 		this.nodeName = nodeName;
 		this.g = 0.0;
 		this.h = 0.0;
+	}
+	
+	/**
+	 * This constructor is specifically used for creating NodeInfo objects, 
+	 * which will be used in Minimum Spanning Tree
+	 * @param nodeName
+	 * @param g: straight line distance of node from the parent
+	 * @param s: true if this function is called for mst
+	 */
+	public NodeInfo(String nodeName,double g){
+		this.nodeName = nodeName;
+		this.g = g;
+		this.h = 0.0;
+		this.f= 0.0;
+		
 	}
 	
 }

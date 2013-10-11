@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  * 
- * @author pranavbhatt
+ * @author pranavbhatt (c) 2013
  *  This is a class which writes Logs and Outputs for various search algorithms.
  * 
  */
