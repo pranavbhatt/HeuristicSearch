@@ -15,15 +15,22 @@ import java.util.*;
 
 class Astar {
 
-	int count = 0;
 	/**
-	 * frontier is a FIFO queue
+	 * frontier is a FIFO priority queue
 	 * child is a node that is removed from the parent's childList
 	 * childList is a list of nodes that a parent is connected to.
 	 * endtour is the tour from the the last visited node back to the source node which is also the goal node
 	 * 
 	 */
-	LinkedList<NodeInfo> frontier;
+	
+	PriorityQueue<NodeInfo> frontier = new PriorityQueue<NodeInfo>(1,new Compare() {
+        @Override
+        public int compare(NodeInfo o1, NodeInfo o2) {
+        return Double.valueOf(o1.f).compareTo(o2.f);
+        }
+    });
+	
+	
 	Node child;
 	List<Node> childList;
 	NodeInfo childData, endTour;
@@ -31,6 +38,10 @@ class Astar {
 	Double gcost, hcost;
 	
 
+	
+	
+	
+	
 	/**
 	 * heuristicCost takes in a string value child, and finds its straight line
 	 * distance from the goal node
@@ -99,14 +110,12 @@ class Astar {
 
 		LOWriter.init();
 
-		frontier = new LinkedList<NodeInfo>(); 
 		node = new NodeInfo(tsp.initialState); 
 
 		frontier.add(node);
 
 		while (true) {
 
-			Compare.sortT(frontier);
 
 			if (frontier.peek() == null) {
 				return;

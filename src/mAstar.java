@@ -18,7 +18,7 @@ class mAstar {
 	int count = 0;
 
 	/**
-	 * frontier is a FIFO queue
+	 * frontier is a FIFO priority queue
 	 * explored is a LinkedList of explored Nodes in the graph
 	 * current is a LinkedList of current visited nodes,which we have to look through to find the minimum edge
 	 * child is a node that is removed from the parent's childList
@@ -26,7 +26,15 @@ class mAstar {
 	 * Endtour is the tour from the the last visited node back to the source node which is also the goal node
 	 * 
 	 */
-	LinkedList<NodeInfo> frontier;
+	
+	
+	PriorityQueue<NodeInfo> frontier = new PriorityQueue<NodeInfo>(1,new Compare() {
+        @Override
+        public int compare(NodeInfo o1, NodeInfo o2) {
+        return Double.valueOf(o1.f).compareTo(o2.f);
+        }
+    });
+	
 	Node child;
 	List<Node> childList;
 	NodeInfo childData, endTour;
@@ -101,7 +109,7 @@ class mAstar {
 
 
 				if (!(node.path.contains(child.name))) {
-
+					
 
 					gcost = child.sld + node.g;
 					hcost = 0.0;
@@ -152,7 +160,6 @@ class mAstar {
 		/**
 		 * frontier a queue of nodes
 		 */
-		frontier = new LinkedList<NodeInfo>(); 
 		node = new NodeInfo(tsp.initialState); 
 
 		frontier.add(node);
@@ -162,7 +169,6 @@ class mAstar {
 
 		while (true) {
 
-			Compare.sortT(frontier);
 
 			if (frontier.peek() == null) {
 				return;
@@ -172,8 +178,7 @@ class mAstar {
 			 * Removing the front of the queue frontier
 			 */
 			node = frontier.remove();
-			
-
+		
 			if (node.path.size() == (tsp.numNodes - 1)) {
 
 				/**
