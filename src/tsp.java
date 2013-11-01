@@ -63,9 +63,6 @@ class tsp{
 
 				}
 			}
-				
-					mAstar s = new mAstar();
-					s.search();
 		
 		if(option == 1){
 			
