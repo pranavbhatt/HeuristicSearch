@@ -1,0 +1,8 @@
+a
+c
+d
+e
+f
+b
+a
+Total Tour Cost: 48.38888887514183
